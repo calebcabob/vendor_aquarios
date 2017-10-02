@@ -16,6 +16,9 @@
 PRODUCT_PACKAGE_OVERLAYS += \
    vendor/aquarios/overlay/common
 
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
+   vendor/aquarios/overlay/common
+
 # Include some other segments
 include vendor/aquarios/configs/aquarios_defaults.mk
 include vendor/aquarios/configs/packages.mk
@@ -48,7 +51,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
     ro.setupwizard.rotation_locked=true \
-    ro.actionable_compatible_property.enabled=false
+    ro.actionable_compatible_property.enabled=false \
+    ro.com.google.ime.theme_id=5
 
 # Security Enhanced Linux
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -75,6 +79,9 @@ else
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=1
 endif
+
+# Don't compile SystemUITests (Anyway we do not use SystemUI)
+EXCLUDE_SYSTEMUI_TESTS := true
 
 # Vendor/themes
 $(call inherit-product, vendor/assets/common.mk)
