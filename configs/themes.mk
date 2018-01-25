@@ -39,7 +39,8 @@ PRODUCT_PACKAGES += \
 # Dark theme
 PRODUCT_PACKAGES += \
     SettingsDarkTheme \
-    SystemDarkTheme
+    SystemDarkTheme \
+    GBoardDarkTheme
 
 
 
