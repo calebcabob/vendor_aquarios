@@ -43,6 +43,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enterprise_mode=1 \
     ro.com.android.dataroaming=false \
     ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent \
+    persist.debug.wfd.enable=1 \
+    persist.sys.wfd.virtual=0 \
     ro.setupwizard.rotation_locked=true \
     ro.actionable_compatible_property.enabled=false
 
