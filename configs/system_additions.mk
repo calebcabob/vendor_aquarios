@@ -40,12 +40,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.media_vol_steps=30 \
     ro.config.bt_sco_vol_steps=30
 
-# Packages
+# Dark theme
 PRODUCT_PACKAGES += \
     GBoardDarkTheme \
     SystemUIDarkTheme \
     SettingsDarkTheme \
     SystemDarkTheme
+
+# BlackAF theme
+PRODUCT_PACKAGES += \
+    DuiBlackAF \
+    GBoardBlackAF \
+    SettingsBlackAF \
+    SystemBlackAF 
 
 # Overlays
 PRODUCT_PACKAGES += \
