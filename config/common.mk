@@ -185,6 +185,9 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
 
+# Don't export PS1 in /system/etc/mkshrc.
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/common/etc/mkshrc:system/etc/mkshrc
 # AquariOS permissions 
 -include vendor/aquarios/configs/permissions.mk
 
@@ -203,12 +206,19 @@ PRODUCT_COPY_FILES += \
 # AquariOS bootanimation 
 -include vendor/aquarios/config/bootanimation.mk
 
-# Packages
+# Dark theme
 PRODUCT_PACKAGES += \
     GBoardDarkTheme \
     SystemUIDarkTheme \
     SettingsDarkTheme \
     SystemDarkTheme
+
+# BlackAF theme
+PRODUCT_PACKAGES += \
+    DuiBlackAF \
+    GBoardBlackAF \
+    SettingsBlackAF \
+    SystemBlackAF 
 
 # Overlays
 PRODUCT_PACKAGES += \
