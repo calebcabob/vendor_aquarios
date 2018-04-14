@@ -53,3 +53,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/root/mkshrc:system/etc/mkshrc
+
+# Clean cache
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
