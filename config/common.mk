@@ -235,5 +235,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Fonts
 
+# AdBlocking
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/etc/hosts/hosts:system/etc/hosts
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)
