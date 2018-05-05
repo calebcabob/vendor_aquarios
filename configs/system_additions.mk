@@ -74,3 +74,7 @@ PRODUCT_PACKAGES += \
 # Fonts
 PRODUCT_PACKAGES += \
     Fonts
+
+# AdBlocking
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/etc/hosts/hosts:system/etc/hosts
