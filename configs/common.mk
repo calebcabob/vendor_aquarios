@@ -62,5 +62,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
 
+# Don't export PS1 in /system/etc/mkshrc.
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/root/mkshrc:system/etc/mkshrc
+
 # AquariOS permissions 
 -include vendor/aquarios/configs/permissions.mk
