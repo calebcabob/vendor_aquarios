@@ -61,3 +61,6 @@ PRODUCT_PACKAGES += \
 # Clean cache
 PRODUCT_COPY_FILES += \
     vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
+
+# AquariOS permissions 
+-include vendor/aquarios/configs/permissions.mk
