@@ -185,6 +185,9 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
 
+# AquariOS permissions 
+-include vendor/aquarios/configs/permissions.mk
+
 # Set AquariOS theme to Aqua (aka Stock)
 PRODUCT_PROPERTY_OVERRIDES += \
 ro.boot.vendor.overlay.theme=com.google.android.theme.stock
