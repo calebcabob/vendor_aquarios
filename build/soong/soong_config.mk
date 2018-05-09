@@ -1,5 +1,5 @@
 # Insert new variables inside the Slim structure
-slim_soong:
+aquarios_soong:
 	$(hide) mkdir -p $(dir $@)
 	$(hide) (\
 	echo '{'; \

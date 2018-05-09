@@ -14,33 +14,84 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------
-# Slim OTA update package
+# AQUARIOS OTA update package
 
 # Build colors
 
 ifneq ($(BUILD_WITH_COLORS),0)
-  CL_SLIM="\033[38;5;24m"
-  CL_SGRY="\033[38;5;239m"
-  CL_RST="\033[0m"
+ #Fancy finish logo colors
+eeeeee="\033[38;5;255m"
+e4e4e4="\033[38;5;254m"
+dadada="\033[38;5;253m"
+d0d0d0="\033[38;5;252m"
+ff875f="\033[38;5;208m"
+005f87="\033[38;5;24m"
+0087af="\033[38;5;31m"
+5f87af="\033[38;5;67m"
+5fafaf="\033[38;5;73m"
+5fd7d7="\033[38;5;80m"
+00d7d7="\033[38;5;44m"
+5fffd7="\033[38;5;86m"
+5fffff="\033[38;5;87m"
+87ffd7="\033[38;5;122m"
+00d7ff="\033[38;5;45m"
 endif
 
-SLIM_TARGET_PACKAGE := $(PRODUCT_OUT)/$(SLIM_MOD_VERSION).zip
+AQUARIOS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(AQUARIOS_MOD_VERSION).zip
 
 .PHONY: bacon
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(SLIM_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(SLIM_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(SLIM_TARGET_PACKAGE).md5sum
+    $(hide) mv $(INTERNAL_OTA_PACKAGE_TARGET) $(AQUARIOS_TARGET_PACKAGE)
+    $(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(AQUARIOS_TARGET_PACKAGE).md5sum
+
+	@echo -e ""
+	@echo -e ""
+	@echo -e ""
+	@echo -e ${5fffff}"	                                   oo                          "${CL_RST}
+	@echo -e ${5fffff}"	                                oooo                           "${CL_RST}
+	@echo -e ${5fffff}"	                          oooooooooooo                         "${CL_RST}
+	@echo -e ${5fffff}"	                          oooooooooooooooooo                   "${CL_RST}
+	@echo -e ${5fffff}"	                      oooooooooooooooooooooo                   "${CL_RST}
+	@echo -e ${5fffff}"	                      ooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${5fffd7}"	                     oooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${5fffd7}"	                   ooooooooooooooooooooooooooo                 "${CL_RST}
+	@echo -e ${5fffd7}"	                      ooooooooooooooooooooooooo                "${CL_RST}
+	@echo -e ${5fffd7}"	                    ooooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${00d7d7}"	                   oooooooooooooooooooooooooooooooo            "${CL_RST}
+	@echo -e ${00d7d7}"	                 oooooooooooooooooo ooooooooooooooooo          "${CL_RST}
+	@echo -e ${00d7d7}"	                 ooooooooooooooooooo  ooo  oooooooooooo        "${CL_RST}
+	@echo -e ${00d7d7}"	                 oooooooooooooooooooooo          ooooo         "${CL_RST}
+	@echo -e ${00d7d7}"	                 ooooooooooooooooooooooooo                     "${CL_RST}
+	@echo -e ${00d7d7}"	                  ooooooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${00d7d7}"	                   oooooooooooooooooooooooooooo                "${CL_RST}
+	@echo -e ${00d7d7}"	                    oooooooooooooooooooooooooooo               "${CL_RST}
+	@echo -e ${5fd7d7}"	                   o  ooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${5fd7d7}"	         oo      oooo   oooooooooooooooooooooooooo             "${CL_RST}
+	@echo -e ${5fd7d7}"	          ooooooooooo   oooooooooooooooooooooooooo             "${CL_RST}
+	@echo -e ${5fd7d7}"	           ooooooooooooooooooooooooooooooooooooooo             "${CL_RST}
+	@echo -e ${5fd7d7}"	           oooooooooooooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${5fafaf}"	       ooooooooooooooooooooooooooooooooooooooooo               "${CL_RST}
+	@echo -e ${5fafaf}"	           oooooooooooooooooooooooooooooooooooo                "${CL_RST}
+	@echo -e ${5fafaf}"	          ooooooooooooooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${5fafaf}"	       ooooooooooooooooooooooooooooooooooo                     "${CL_RST}
+	@echo -e ${5f87af}"	            ooooooooooooooooooooooooooo                        "${CL_RST}
+	@echo -e ${5f87af}"	          oooooooooooooooooooooooooo                           "${CL_RST}
+	@echo -e ${5f87af}"	                 ooooooooooooooo                               "${CL_RST}
+	@echo -e ${5f87af}"	                ooooooooooooooo                                "${CL_RST}
+	@echo -e ${5f87af}"	                oooooooooooooo                                 "${CL_RST}
+	@echo -e ${0087af}"	                oooooooooooooo         ooooooooo               "${CL_RST}
+	@echo -e ${0087af}"	                oooooooooooooo       ooooooooooooo             "${CL_RST}
+	@echo -e ${0087af}"	                ooooooooooooooo     ooooo  ooooooo             "${CL_RST}
+	@echo -e ${0087af}"	                 oooooooooooooo     ooo      oooooo            "${CL_RST}
+	@echo -e ${0087af}"	                  oooooooooooooo    oo       oooooo            "${CL_RST}
+	@echo -e ${0087af}"	                    ooooooooooooooo  o     ooooooo             "${CL_RST}
+	@echo -e ${0087af}"	                     oooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${005f87}"	                        oooooooooooooooooooooooo               "${CL_RST}
+	@echo -e ${005f87}"	                           oooooooooooooooooooo                "${CL_RST}
+	@echo -e ${005f87}"	                                ooooooooooo                    "${CL_RST}
 	@echo -e " "
-	@echo -e ${CL_SLIM}" "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                              _______________________________________________  "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                             /                                  slimroms.org | "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                            /   _____________________________________________| "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                           /   /                                               "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                          /   /  _  _      "${CL_SGRY}" ______                             "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                         /   /  | |(_)     "${CL_SGRY}"(_____ \                            "${CL_SLIM}
-	@echo -e ${CL_SLIM}"                        /   /   | | _ _____ "${CL_SGRY}"_____) )___  _____  ___            "${CL_SLIM}
-	@echo -e ${CL_SLIM}"  _____________________/   /    | || |     |"${CL_SGRY}"  __  // _ \|     |/___)           "${CL_SLIM}
-	@echo -e ${CL_SLIM}" |                        /     | || | | | |"${CL_SGRY}" |  \ \ |_| | | | |___ |           "${CL_SLIM}
-	@echo -e ${CL_SLIM}" |_______________________/       \_)_|_|_|_|"${CL_SGRY}"_|   |_\___/|_|_|_(___/            "${CL_SLIM}
-	@echo -e ${CL_SLIM}" "${CL_SLIM}
-	@echo -e ${CL_CYN}"Package Complete: $(SLIM_TARGET_PACKAGE)"${CL_RST}
+	@echo -e " "${CL_RST}
+	@echo -e ${ff875f}"			  Welcome to the age of AquariOS"${CL_RST}
+	@echo -e " "
+	@echo -e ${CL_BWT}"Package Complete: $(AQUARIOS_TARGET_PACKAGE)"${CL_RST}
+	@echo -e "SIZE:"${CL_CYN}" `ls -la --si $(AQUARIOS_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}

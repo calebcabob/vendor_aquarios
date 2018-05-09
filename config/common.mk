@@ -25,21 +25,21 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/slim/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/slim/prebuilt/common/bin/50-slim.sh:system/addon.d/50-slim.sh
+    vendor/AQUARIOS/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/AQUARIOS/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/AQUARIOS/prebuilt/common/bin/50-AQUARIOS.sh:system/addon.d/50-AQUARIOS.sh
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+    vendor/AQUARIOS/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
-# SLIM-specific init file
+# AQUARIOS-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/init.slim.rc:system/etc/init/init.slim.rc
+    vendor/AQUARIOS/prebuilt/common/etc/init.AQUARIOS.rc:system/etc/init/init.AQUARIOS.rc
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    vendor/AQUARIOS/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -47,8 +47,8 @@ PRODUCT_COPY_FILES += \
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
-    vendor/slim/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
+    vendor/AQUARIOS/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
+    vendor/AQUARIOS/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 # debug packages
 ifneq ($(TARGET_BUILD_VARIENT),user)
@@ -58,7 +58,7 @@ endif
 
 # TWRP
 ifeq ($(WITH_TWRP),true)
-include vendor/slim/config/twrp.mk
+include vendor/AQUARIOS/config/twrp.mk
 endif
 
 # Optional packages
@@ -79,17 +79,17 @@ PRODUCT_PACKAGES += \
 # Extra Optional packages
 PRODUCT_PACKAGES += \
     bootanimation.zip \
-    SlimLauncher \
-    SlimWallpaperResizer \
-    SlimWallpapers \
+    AQUARIOSLauncher \
+    AQUARIOSWallpaperResizer \
+    AQUARIOSWallpapers \
     LatinIME \
     BluetoothExt \
     WallpaperPicker
-#    SlimFileManager removed until updated
+#    AQUARIOSFileManager removed until updated
 
-ifneq ($(DISABLE_SLIM_FRAMEWORK), true)
-## Slim Framework
-include frameworks/slim/slim_framework.mk
+ifneq ($(DISABLE_AQUARIOS_FRAMEWORK), true)
+## AQUARIOS Framework
+include frameworks/AQUARIOS/AQUARIOS_framework.mk
 endif
 
 ## Don't compile SystemUITests
@@ -121,49 +121,49 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.sf.extractor-plugin=libffmpeg_extractor.so
 
 PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/slim/overlay/common \
-    vendor/slim/overlay/dictionaries
+    vendor/AQUARIOS/overlay/common \
+    vendor/AQUARIOS/overlay/dictionaries
 
 # Versioning System
-# Slim version.
+# AQUARIOS version.
 PRODUCT_VERSION_MAJOR = $(PLATFORM_VERSION)
 PRODUCT_VERSION_MINOR = build
 PRODUCT_VERSION_MAINTENANCE = 0.1
-ifdef SLIM_BUILD_EXTRA
-    SLIM_POSTFIX := -$(SLIM_BUILD_EXTRA)
+ifdef AQUARIOS_BUILD_EXTRA
+    AQUARIOS_POSTFIX := -$(AQUARIOS_BUILD_EXTRA)
 endif
-ifndef SLIM_BUILD_TYPE
-    SLIM_BUILD_TYPE := UNOFFICIAL
-endif
-
-ifeq ($(SLIM_BUILD_TYPE),DM)
-    SLIM_POSTFIX := -$(shell date +"%Y%m%d")
+ifndef AQUARIOS_BUILD_TYPE
+    AQUARIOS_BUILD_TYPE := UNOFFICIAL
 endif
 
-ifndef SLIM_POSTFIX
-    SLIM_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+ifeq ($(AQUARIOS_BUILD_TYPE),DM)
+    AQUARIOS_POSTFIX := -$(shell date +"%Y%m%d")
+endif
+
+ifndef AQUARIOS_POSTFIX
+    AQUARIOS_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 endif
 
 # Set all versions
-SLIM_VERSION := 8.1
-SLIM_MOD_VERSION := Slim-$(SLIM_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
+AQUARIOS_VERSION := 8.1
+AQUARIOS_MOD_VERSION := AQUARIOS-$(AQUARIOS_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(AQUARIOS_BUILD_TYPE)$(AQUARIOS_POSTFIX)
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
-    slim.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
-    ro.slim.version=$(SLIM_VERSION) \
-    ro.modversion=$(SLIM_MOD_VERSION) \
-    ro.slim.buildtype=$(SLIM_BUILD_TYPE)
+    AQUARIOS.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
+    ro.AQUARIOS.version=$(AQUARIOS_VERSION) \
+    ro.modversion=$(AQUARIOS_MOD_VERSION) \
+    ro.AQUARIOS.buildtype=$(AQUARIOS_BUILD_TYPE)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.slim.version=$(SLIM_VERSION) \
+    ro.AQUARIOS.version=$(AQUARIOS_VERSION) \
 
-EXTENDED_POST_PROCESS_PROPS := vendor/slim/tools/slim_process_props.py
+EXTENDED_POST_PROCESS_PROPS := vendor/AQUARIOS/tools/AQUARIOS_process_props.py
 
 PRODUCT_EXTRA_RECOVERY_KEYS += \
-  vendor/slim/build/target/product/security/slim
+  vendor/AQUARIOS/build/target/product/security/AQUARIOS
 
--include vendor/slim-priv/keys/keys.mk
+-include vendor/AQUARIOS-priv/keys/keys.mk
 
 ifeq ($(BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE),)
   PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

@@ -1,4 +1,4 @@
-# Copyright 2016 SlimRoms Project
+# Copyright 2016 AquariOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := vendor/slim/sounds/material
+LOCAL_PATH := vendor/aquarios/sounds/material
 
 define create-copy-media-files
 $(strip $(foreach fp,\

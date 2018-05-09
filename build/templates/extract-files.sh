@@ -25,9 +25,9 @@ VENDOR=*** FILL IN VENDOR ****
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-SLIM_ROOT="$MY_DIR"/../../..
+AQUARIOS_ROOT="$MY_DIR"/../../..
 
-HELPER="$SLIM_ROOT"/vendor/slim/build/tools/extract_utils.sh
+HELPER="$AQUARIOS_ROOT"/vendor/AQUARIOS/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -56,7 +56,7 @@ if [ -z "$SRC" ]; then
 fi
 
 # Initialize the helper
-setup_vendor "$DEVICE" "$VENDOR" "$SLIM_ROOT" false "$CLEAN_VENDOR"
+setup_vendor "$DEVICE" "$VENDOR" "$AQUARIOS_ROOT" false "$CLEAN_VENDOR"
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 

@@ -44,7 +44,7 @@ trap cleanup 0
 #
 # $1: device name
 # $2: vendor name
-# $3: SLIM root directory
+# $3: AQUARIOS root directory
 # $4: is common device - optional, default to false
 # $5: cleanup - optional, default to true
 # $6: custom vendor makefile name - optional, default to false
@@ -65,15 +65,15 @@ function setup_vendor() {
         exit 1
     fi
 
-    export SLIM_ROOT="$3"
-    if [ ! -d "$SLIM_ROOT" ]; then
-        echo "\$SLIM_ROOT must be set and valid before including this script!"
+    export AQUARIOS_ROOT="$3"
+    if [ ! -d "$AQUARIOS_ROOT" ]; then
+        echo "\$AQUARIOS_ROOT must be set and valid before including this script!"
         exit 1
     fi
 
     export OUTDIR=vendor/"$VENDOR"/"$DEVICE"
-    if [ ! -d "$SLIM_ROOT/$OUTDIR" ]; then
-        mkdir -p "$SLIM_ROOT/$OUTDIR"
+    if [ ! -d "$AQUARIOS_ROOT/$OUTDIR" ]; then
+        mkdir -p "$AQUARIOS_ROOT/$OUTDIR"
     fi
 
     VNDNAME="$6"
@@ -81,9 +81,9 @@ function setup_vendor() {
         VNDNAME="$DEVICE"
     fi
 
-    export PRODUCTMK="$SLIM_ROOT"/"$OUTDIR"/"$VNDNAME"-vendor.mk
-    export ANDROIDMK="$SLIM_ROOT"/"$OUTDIR"/Android.mk
-    export BOARDMK="$SLIM_ROOT"/"$OUTDIR"/BoardConfigVendor.mk
+    export PRODUCTMK="$AQUARIOS_ROOT"/"$OUTDIR"/"$VNDNAME"-vendor.mk
+    export ANDROIDMK="$AQUARIOS_ROOT"/"$OUTDIR"/Android.mk
+    export BOARDMK="$AQUARIOS_ROOT"/"$OUTDIR"/BoardConfigVendor.mk
 
     if [ "$4" == "true" ] || [ "$4" == "1" ]; then
         COMMON=1
@@ -512,16 +512,16 @@ function write_header() {
             printf "# Copyright (C) 2016 The CyanogenMod Project\n" > $1
         fi
         if [ $YEAR -eq 2017 ]; then
-            printf "# Copyright (C) 2017 SlimRoms\n" >> $1
+            printf "# Copyright (C) 2017 AquariOS\n" >> $1
         elif [ $INITIAL_COPYRIGHT_YEAR -eq $YEAR ]; then
-            printf "# Copyright (C) $YEAR SlimRoms\n" >> $1
+            printf "# Copyright (C) $YEAR AquariOS\n" >> $1
         elif [ $INITIAL_COPYRIGHT_YEAR -le 2017 ]; then
-            printf "# Copyright (C) 2017-$YEAR SlimRoms\n" >> $1
+            printf "# Copyright (C) 2017-$YEAR AquariOS\n" >> $1
         else
-            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR SlimRoms\n" >> $1
+            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR AquariOS\n" >> $1
         fi
     else
-        printf "# Copyright (C) $YEAR SlimRoms\n" > $1
+        printf "# Copyright (C) $YEAR AquariOS\n" > $1
     fi
 
     cat << EOF >> $1
@@ -738,7 +738,7 @@ function get_file() {
 # Convert apk|jar .odex in the corresposing classes.dex
 #
 function oat2dex() {
-    local SLIM_TARGET="$1"
+    local AQUARIOS_TARGET="$1"
     local OEM_TARGET="$2"
     local SRC="$3"
     local TARGET=
@@ -746,12 +746,12 @@ function oat2dex() {
     local HOST="$(uname)"
 
     if [ -z "$BAKSMALIJAR" ] || [ -z "$SMALIJAR" ]; then
-        export BAKSMALIJAR="$SLIM_ROOT"/vendor/slim/build/tools/smali/baksmali.jar
-        export SMALIJAR="$SLIM_ROOT"/vendor/slim/build/tools/smali/smali.jar
+        export BAKSMALIJAR="$AQUARIOS_ROOT"/vendor/aquarios/build/tools/smali/baksmali.jar
+        export SMALIJAR="$AQUARIOS_ROOT"/vendor/aquarios/build/tools/smali/smali.jar
     fi
 
     if [ -z "$VDEXEXTRACTOR" ]; then
-        export VDEXEXTRACTOR="$SLIM_ROOT"/vendor/slim/build/tools/"$HOST"/vdexExtractor
+        export VDEXEXTRACTOR="$AQUARIOS_ROOT"/vendor/aquarios/build/tools/"$HOST"/vdexExtractor
     fi
 
     # Extract existing boot.oats to the temp folder
@@ -776,11 +776,11 @@ function oat2dex() {
         FULLY_DEODEXED=1 && return 0 # system is fully deodexed, return
     fi
 
-    if [ ! -f "$SLIM_TARGET" ]; then
+    if [ ! -f "$AQUARIOS_TARGET" ]; then
         return;
     fi
 
-    if grep "classes.dex" "$SLIM_TARGET" >/dev/null; then
+    if grep "classes.dex" "$AQUARIOS_TARGET" >/dev/null; then
         return 0 # target apk|jar is already odexed, return
     fi
 
@@ -798,7 +798,7 @@ function oat2dex() {
                 java -jar "$BAKSMALIJAR" deodex -o "$TMPDIR/dexout" -b "$BOOTOAT" -d "$TMPDIR" "$TMPDIR/$(basename "$OAT")"
                 java -jar "$SMALIJAR" assemble "$TMPDIR/dexout" -o "$TMPDIR/classes.dex"
             fi
-        elif [[ "$SLIM_TARGET" =~ .jar$ ]]; then
+        elif [[ "$AQUARIOS_TARGET" =~ .jar$ ]]; then
             JAROAT="$TMPDIR/system/framework/$ARCH/boot-$(basename ${OEM_TARGET%.*}).oat"
             JARVDEX="$TMPDIR/system/framework/$ARCH/boot-$(basename ${OEM_TARGET%.*}).vdex"
             if [ ! -f "$JAROAT" ]; then
@@ -894,7 +894,7 @@ function extract() {
     local HASHLIST=( ${PRODUCT_COPY_FILES_HASHES[@]} ${PRODUCT_PACKAGES_HASHES[@]} )
     local COUNT=${#FILELIST[@]}
     local SRC="$2"
-    local OUTPUT_ROOT="$SLIM_ROOT"/"$OUTDIR"/proprietary
+    local OUTPUT_ROOT="$AQUARIOS_ROOT"/"$OUTDIR"/proprietary
     local OUTPUT_TMP="$TMPDIR"/"$OUTDIR"/proprietary
 
     if [ "$SRC" = "adb" ]; then
@@ -922,7 +922,7 @@ function extract() {
             # If OTA is block based, extract it.
             elif [ -a "$DUMPDIR"/system.new.dat ]; then
                 echo "Converting system.new.dat to system.img"
-                python "$SLIM_ROOT"/vendor/slim/build/tools/sdat2img.py "$DUMPDIR"/system.transfer.list "$DUMPDIR"/system.new.dat "$DUMPDIR"/system.img 2>&1
+                python "$AQUARIOS_ROOT"/vendor/aquarios/build/tools/sdat2img.py "$DUMPDIR"/system.transfer.list "$DUMPDIR"/system.new.dat "$DUMPDIR"/system.img 2>&1
                 rm -rf "$DUMPDIR"/system.new.dat "$DUMPDIR"/system
                 mkdir "$DUMPDIR"/system "$DUMPDIR"/tmp
                 echo "Requesting sudo access to mount the system.img"
@@ -1008,14 +1008,14 @@ function extract() {
         if [ "$KEEP" = "1" ]; then
             printf '    + (keeping pinned file with hash %s)\n' "$HASH"
         elif [ "$SRC" = "adb" ]; then
-            # Try SLIM target first
+            # Try AQUARIOS target first
             adb pull "/$TARGET" "$DEST"
             # if file does not exist try OEM target
             if [ "$?" != "0" ]; then
                 adb pull "/$FILE" "$DEST"
             fi
         else
-            # Try SLIM target first
+            # Try AQUARIOS target first
             if [ -f "$SRC/$TARGET" ]; then
                 cp "$SRC/$TARGET" "$DEST"
             # if file does not exist try OEM target
@@ -1075,7 +1075,7 @@ function extract_firmware() {
     local FILELIST=( ${PRODUCT_COPY_FILES_LIST[@]} )
     local COUNT=${#FILELIST[@]}
     local SRC="$2"
-    local OUTPUT_DIR="$SLIM_ROOT"/"$OUTDIR"/radio
+    local OUTPUT_DIR="$AQUARIOS_ROOT"/"$OUTDIR"/radio
 
     if [ "$VENDOR_RADIO_STATE" -eq "0" ]; then
         echo "Cleaning firmware output directory ($OUTPUT_DIR).."
