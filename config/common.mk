@@ -85,13 +85,8 @@ PRODUCT_PACKAGES += \
     LatinIME \
     BluetoothExt \
     WallpaperPicker
+
 #    AQUARIOSFileManager removed until updated
-
-ifneq ($(DISABLE_AQUARIOS_FRAMEWORK), true)
-## AQUARIOS Framework
-include frameworks/AQUARIOS/AQUARIOS_framework.mk
-endif
-
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
 

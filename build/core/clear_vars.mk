@@ -1,6 +1,6 @@
 #
 #
-# Slim specific variable clears
+# Aquarios specific variable clears
 #
 #
 
