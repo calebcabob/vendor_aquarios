@@ -25,21 +25,21 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/AQUARIOS/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/AQUARIOS/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/AQUARIOS/prebuilt/common/bin/50-AQUARIOS.sh:system/addon.d/50-AQUARIOS.sh
+    vendor/aquarios/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/aquarios/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/aquarios/prebuilt/common/bin/50-aquarios.sh:system/addon.d/50-aquarios.sh
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/AQUARIOS/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+    vendor/aquarios/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
 # AQUARIOS-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/AQUARIOS/prebuilt/common/etc/init.AQUARIOS.rc:system/etc/init/init.AQUARIOS.rc
+    vendor/aquarios/prebuilt/common/etc/init.aquarios.rc:system/etc/init/init.aquarios.rc
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/AQUARIOS/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    vendor/aquarios/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -47,8 +47,8 @@ PRODUCT_COPY_FILES += \
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
-    vendor/AQUARIOS/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
-    vendor/AQUARIOS/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
+    vendor/aquarios/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
+    vendor/aquarios/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 # debug packages
 ifneq ($(TARGET_BUILD_VARIENT),user)
@@ -73,15 +73,13 @@ PRODUCT_PACKAGES += \
     librsjni
 
 #SnapdragonGallery
-PRODUCT_PACKAGES += \
-    SnapdragonGallery
+#PRODUCT_PACKAGES += \
+#    SnapdragonGallery
 
 # Extra Optional packages
 PRODUCT_PACKAGES += \
     bootanimation.zip \
     AQUARIOSLauncher \
-    AQUARIOSWallpaperResizer \
-    AQUARIOSWallpapers \
     LatinIME \
     BluetoothExt \
     WallpaperPicker
@@ -116,8 +114,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.sf.extractor-plugin=libffmpeg_extractor.so
 
 PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/AQUARIOS/overlay/common \
-    vendor/AQUARIOS/overlay/dictionaries
+    vendor/aquarios/overlay/common \
+    vendor/aquarios/overlay/dictionaries
 
 # Versioning System
 # AQUARIOS version.
