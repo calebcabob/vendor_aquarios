@@ -78,7 +78,7 @@ PRODUCT_PACKAGES += \
 
 # Extra Optional packages
 PRODUCT_PACKAGES += \
-    Launcher 3 \
+    Launcher3 \
     LatinIME \
     BluetoothExt \
     WallpaperPicker
