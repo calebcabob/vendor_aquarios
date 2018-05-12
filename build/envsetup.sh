@@ -1,22 +1,22 @@
-# AQUARIOS functions that extend build/envsetup.sh
-function __print_AQUARIOS_functions_help() {
+# aquarios functions that extend build/envsetup.sh
+function __print_aquarios_functions_help() {
 cat <<EOF
-Additional AQUARIOSRoms functions:
+Additional AquariOS functions:
 - cout:            Changes directory to out.
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
 - mms:             Short circuit builder. Quickly re-build the kernel, rootfs, boot and system images
                    without deep dependencies. Requires the full build to have run before.
-- AQUARIOSgerrit:      A Git wrapper that fetches/pushes patch from/to AQUARIOS Gerrit Review.
-- AQUARIOSrebase:      Rebase a Gerrit change and push it again.
-- AQUARIOSremote:      Add a git remote for AQUARIOS github repository.
+- aquariosgerrit:      A Git wrapper that fetches/pushes patch from/to AQUARIOS Gerrit Review.
+- aquariosrebase:      Rebase a Gerrit change and push it again.
+- aquariosremote:      Add a git remote for AQUARIOS github repository.
 - losremote:       Add git remote pointing to the LineageOS github repository.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
-- AQUARIOSka:            Cleans and builds using mka.
+- aquarioska:            Cleans and builds using mka.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
 - reposync:        Parallel repo sync using ionice and SCHED_BATCH.
@@ -26,12 +26,12 @@ Additional AQUARIOSRoms functions:
 EOF
 }
 
-function AQUARIOS_device_combos()
+function aquarios_device_combos()
 {
     local T list_file variant device
 
     T="$(gettop)"
-    list_file="${T}/vendor/AQUARIOS/AQUARIOS.devices"
+    list_file="${T}/vendor/aquarios/aquarios.devices"
     variant="userdebug"
 
     if [[ $1 ]]
@@ -53,45 +53,45 @@ function AQUARIOS_device_combos()
     if [[ ! -f "${list_file}" ]]
     then
         echo "unable to find device list: ${list_file}"
-        list_file="${T}/vendor/AQUARIOS/AQUARIOS.devices"
+        list_file="${T}/vendor/aquarios/aquarios.devices"
         echo "defaulting device list file to: ${list_file}"
     fi
 
     while IFS= read -r device
     do
-        add_lunch_combo "AQUARIOS_${device}-${variant}"
+        add_lunch_combo "aquarios_${device}-${variant}"
     done < "${list_file}"
 }
 
-function AQUARIOS_rename_function()
+function aquarios_rename_function()
 {
-    eval "original_AQUARIOS_$(declare -f ${1})"
+    eval "original_aquarios_$(declare -f ${1})"
 }
 
-function _AQUARIOS_build_hmm() #hidden
+function _aquarios_build_hmm() #hidden
 {
     printf "%-8s %s" "${1}:" "${2}"
 }
 
-function AQUARIOS_append_hmm()
+function aquarios_append_hmm()
 {
-    HMM_DESCRIPTIVE=("${HMM_DESCRIPTIVE[@]}" "$(_AQUARIOS_build_hmm "$1" "$2")")
+    HMM_DESCRIPTIVE=("${HMM_DESCRIPTIVE[@]}" "$(_aquarios_build_hmm "$1" "$2")")
 }
 
-function AQUARIOS_add_hmm_entry()
+function aquarios_add_hmm_entry()
 {
     for c in ${!HMM_DESCRIPTIVE[*]}
     do
         if [[ "${1}" == $(echo "${HMM_DESCRIPTIVE[$c]}" | cut -f1 -d":") ]]
         then
-            HMM_DESCRIPTIVE[${c}]="$(_AQUARIOS_build_hmm "$1" "$2")"
+            HMM_DESCRIPTIVE[${c}]="$(_aquarios_build_hmm "$1" "$2")"
             return
         fi
     done
-    AQUARIOS_append_hmm "$1" "$2"
+    aquarios_append_hmm "$1" "$2"
 }
 
-function AQUARIOSremote()
+function aquariosremote()
 {
     local proj pfx project
 
@@ -100,7 +100,7 @@ function AQUARIOSremote()
         echo "Not in a git directory. Please run this from an Android repository you wish to set up."
         return
     fi
-    git remote rm AQUARIOS 2> /dev/null
+    git remote rm aquarios 2> /dev/null
 
     proj="$(pwd -P | sed "s#$ANDROID_BUILD_TOP/##g")"
 
@@ -110,8 +110,8 @@ function AQUARIOSremote()
 
     project="${proj//\//_}"
 
-    git remote add AQUARIOS "git@github.com:AQUARIOSRoms/$pfx$project"
-    echo "Remote 'AQUARIOS' created"
+    git remote add aquarios "git@github.com:AquariOS/$pfx$project"
+    echo "Remote 'aquarios' created"
 }
 
 function losremote()
@@ -171,11 +171,11 @@ function cafremote()
     echo "Remote 'caf' created"
 }
 
-function AQUARIOS_push()
+function aquarios_push()
 {
     local branch ssh_name path_opt proj
     branch="lp5.1"
-    ssh_name="AQUARIOS_review"
+    ssh_name="aquarios_review"
     path_opt=
 
     if [[ "$1" ]]
@@ -193,20 +193,20 @@ function AQUARIOS_push()
         proj="android_$proj"
     fi
 
-    git $path_opt push "ssh://${ssh_name}/AQUARIOSRoms/$proj" "HEAD:refs/for/$branch"
+    git $path_opt push "ssh://${ssh_name}/AquariOS/$proj" "HEAD:refs/for/$branch"
 }
 
 
-AQUARIOS_rename_function hmm
+aquarios_rename_function hmm
 function hmm() #hidden
 {
     local i T
     T="$(gettop)"
-    original_AQUARIOS_hmm
+    original_aquarios_hmm
     echo
 
-    echo "vendor/AQUARIOS extended functions. The complete list is:"
-    for i in $(grep -P '^function .*$' "$T/vendor/AQUARIOS/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
+    echo "vendor/aquarios extended functions. The complete list is:"
+    for i in $(grep -P '^function .*$' "$T/vendor/aquarios/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
         echo "$i"
     done |column
 }
@@ -272,7 +272,7 @@ function breakfast()
     AQUARIOS_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/AQUARIOS/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/aquarios/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -292,7 +292,7 @@ function breakfast()
             if [ -z "$variant" ]; then
                 variant="userdebug"
             fi
-            lunch AQUARIOS_$target-$variant
+            lunch aquarios_$target-$variant
         fi
     fi
     return $?
@@ -319,7 +319,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-    if (adb shell getprop ro.AQUARIOS.device | grep -q "$AQUARIOS_BUILD");
+    if (adb shell getprop ro.aquarios.device | grep -q "$AQUARIOS_BUILD");
     then
         # if adbd isn't root we can't write to /cache/recovery/
         adb root
@@ -490,7 +490,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell getprop ro.AQUARIOS.device | grep -q "$AQUARIOS_BUILD");
+    if (adb shell getprop ro.aquarios.device | grep -q "$AQUARIOS_BUILD");
     then
         adb push $OUT/boot.img /cache/
         for i in $OUT/system/lib/modules/*;
@@ -535,7 +535,7 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell getprop ro.AQUARIOS.device | grep -q "$AQUARIOS_BUILD");
+    if (adb shell getprop ro.aquarios.device | grep -q "$AQUARIOS_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
@@ -561,13 +561,13 @@ function makerecipe() {
     if [ "$REPO_REMOTE" = "github" ]
     then
         pwd
-        AQUARIOSremote
-        git push AQUARIOS HEAD:refs/heads/'$1'
+        aquariosremote
+        git push aquarios HEAD:refs/heads/'$1'
     fi
     '
 }
 
-function AQUARIOSgerrit() {
+function aquariosgerrit() {
     if [ "$(__detect_shell)" = "zsh" ]; then
         # zsh does not define FUNCNAME, derive from funcstack
         local FUNCNAME=$funcstack[1]
@@ -577,7 +577,7 @@ function AQUARIOSgerrit() {
         $FUNCNAME help
         return 1
     fi
-    local user=`git config --get review.review.AQUARIOSroms.org.username`
+    local user=`git config --get review.review.aquariosroms.org.username`
     local review=`git config --get remote.github.review`
     local project=`git config --get remote.github.projectname`
     local command=$1
@@ -613,7 +613,7 @@ EOF
             case $1 in
                 __cmg_*) echo "For internal use only." ;;
                 changes|for)
-                    if [ "$FUNCNAME" = "AQUARIOSgerrit" ]; then
+                    if [ "$FUNCNAME" = "aquariosgerrit" ]; then
                         echo "'$FUNCNAME $1' is deprecated."
                     fi
                     ;;
@@ -706,7 +706,7 @@ EOF
                 $local_branch:refs/for/$remote_branch || return 1
             ;;
         changes|for)
-            if [ "$FUNCNAME" = "AQUARIOSgerrit" ]; then
+            if [ "$FUNCNAME" = "aquariosgerrit" ]; then
                 echo >&2 "'$FUNCNAME $command' is deprecated."
             fi
             ;;
@@ -805,15 +805,15 @@ EOF
     esac
 }
 
-function AQUARIOSrebase() {
+function aquariosrebase() {
     local repo=$1
     local refs=$2
     local pwd="$(pwd)"
     local dir="$(gettop)/$repo"
 
     if [ -z $repo ] || [ -z $refs ]; then
-        echo "AQUARIOSRoms Gerrit Rebase Usage: "
-        echo "      AQUARIOSrebase <path to project> <patch IDs on Gerrit>"
+        echo "AquariOS Gerrit Rebase Usage: "
+        echo "      aquariosrebase <path to project> <patch IDs on Gerrit>"
         echo "      The patch IDs appear on the Gerrit commands that are offered."
         echo "      They consist on a series of numbers and slashes, after the text"
         echo "      refs/changes. For example, the ID in the following command is 26/8126/2"
@@ -834,7 +834,7 @@ function AQUARIOSrebase() {
     echo "Bringing it up to date..."
     repo sync .
     echo "Fetching change..."
-    git fetch "http://review.AQUARIOSroms.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
+    git fetch "http://review.aquariosroms.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
     if [ "$?" != "0" ]; then
         echo "Error cherry-picking. Not uploading!"
         return
@@ -850,7 +850,7 @@ function mka() {
     m -j "$@"
 }
 
-function AQUARIOSka() {
+function aquarioska() {
     if [ ! -z "$1" ]; then
         for i in "$@"; do
             case $i in
@@ -941,7 +941,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop ro.AQUARIOS.device | grep -q "$AQUARIOS_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop ro.aquarios.device | grep -q "$AQUARIOS_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -1064,11 +1064,11 @@ alias mmp='dopush mm'
 alias mmmp='dopush mmm'
 alias mmap='dopush mma'
 alias mkap='dopush mka'
-alias AQUARIOSkap='dopush AQUARIOSka'
+alias aquarioskap='dopush aquarioska'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/AQUARIOS/build/tools/repopick.py $@
+    $T/vendor/aquarios/build/tools/repopick.py $@
 }
 
 function fixup_common_out_dir() {

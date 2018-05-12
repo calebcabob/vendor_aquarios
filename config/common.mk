@@ -58,7 +58,7 @@ endif
 
 # TWRP
 ifeq ($(WITH_TWRP),true)
-include vendor/AQUARIOS/config/twrp.mk
+include vendor/aquarios/config/twrp.mk
 endif
 
 # Optional packages
@@ -73,18 +73,16 @@ PRODUCT_PACKAGES += \
     librsjni
 
 #SnapdragonGallery
-#PRODUCT_PACKAGES += \
-#    SnapdragonGallery
+PRODUCT_PACKAGES += \
+    SnapdragonGallery
 
 # Extra Optional packages
 PRODUCT_PACKAGES += \
-    bootanimation.zip \
-    AQUARIOSLauncher \
+    Launcher 3 \
     LatinIME \
     BluetoothExt \
     WallpaperPicker
 
-#    AQUARIOSFileManager removed until updated
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
 
@@ -118,7 +116,7 @@ PRODUCT_PACKAGE_OVERLAYS += \
     vendor/aquarios/overlay/dictionaries
 
 # Versioning System
-# AQUARIOS version.
+# Aquarios version.
 PRODUCT_VERSION_MAJOR = $(PLATFORM_VERSION)
 PRODUCT_VERSION_MINOR = build
 PRODUCT_VERSION_MAINTENANCE = 0.1
@@ -139,24 +137,24 @@ endif
 
 # Set all versions
 AQUARIOS_VERSION := 8.1
-AQUARIOS_MOD_VERSION := AQUARIOS-$(AQUARIOS_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(AQUARIOS_BUILD_TYPE)$(AQUARIOS_POSTFIX)
+AQUARIOS_MOD_VERSION := Aquarios-$(AQUARIOS_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(AQUARIOS_BUILD_TYPE)$(AQUARIOS_POSTFIX)
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
-    AQUARIOS.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
-    ro.AQUARIOS.version=$(AQUARIOS_VERSION) \
+    aquarios.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
+    ro.aquarios.version=$(AQUARIOS_VERSION) \
     ro.modversion=$(AQUARIOS_MOD_VERSION) \
-    ro.AQUARIOS.buildtype=$(AQUARIOS_BUILD_TYPE)
+    ro.aquarios.buildtype=$(AQUARIOS_BUILD_TYPE)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.AQUARIOS.version=$(AQUARIOS_VERSION) \
+    ro.aquarios.version=$(AQUARIOS_VERSION) \
 
-EXTENDED_POST_PROCESS_PROPS := vendor/AQUARIOS/tools/AQUARIOS_process_props.py
+EXTENDED_POST_PROCESS_PROPS := vendor/aquarios/tools/aquarios_process_props.py
 
 PRODUCT_EXTRA_RECOVERY_KEYS += \
-  vendor/AQUARIOS/build/target/product/security/AQUARIOS
+  vendor/aquarios/build/target/product/security/aquarios
 
--include vendor/AQUARIOS-priv/keys/keys.mk
+-include vendor/aquarios-priv/keys/keys.mk
 
 ifeq ($(BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE),)
   PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

@@ -14,12 +14,11 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------
-# AQUARIOS OTA update package
+# Slim OTA update package
 
 # Build colors
 
 ifneq ($(BUILD_WITH_COLORS),0)
- #Fancy finish logo colors
 eeeeee="\033[38;5;255m"
 e4e4e4="\033[38;5;254m"
 dadada="\033[38;5;253m"
@@ -41,8 +40,8 @@ AQUARIOS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(AQUARIOS_MOD_VERSION).zip
 
 .PHONY: bacon
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
-	$(hide) mv $(INTERNAL_OTA_PACKAGE_TARGET) $(AQUARIOSTARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(AQUARIOS_TARGET_PACKAGE).md5sum
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(AQUARIOS_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(AQUARIOS_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(AQUARIOS_TARGET_PACKAGE).md5sum
 	@echo -e ""
 	@echo -e ""
 	@echo -e ""

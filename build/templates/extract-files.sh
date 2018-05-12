@@ -27,7 +27,7 @@ if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
 AQUARIOS_ROOT="$MY_DIR"/../../..
 
-HELPER="$AQUARIOS_ROOT"/vendor/AQUARIOS/build/tools/extract_utils.sh
+HELPER="$AQUARIOS_ROOT"/vendor/aquarios/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
