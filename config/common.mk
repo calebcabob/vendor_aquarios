@@ -1,5 +1,7 @@
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
+include vendor/aquarios/config/aosp_fixes.mk
+
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.com.google.clientidbase=android-google
@@ -81,7 +83,9 @@ PRODUCT_PACKAGES += \
     Launcher3 \
     LatinIME \
     BluetoothExt \
-    WallpaperPicker
+    WallpaperPicker \
+    OmniJaws \
+    OmniStyle
 
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
@@ -100,6 +104,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fsck.exfat \
     mkfs.exfat
+
+# DU Utils Library
+PRODUCT_PACKAGES += \
+    org.dirtyunicorns.utils
+
+PRODUCT_BOOT_JARS += \
+    org.dirtyunicorns.utils
 
 # Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
@@ -149,8 +160,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.aquarios.version=$(AQUARIOS_VERSION) \
 
-EXTENDED_POST_PROCESS_PROPS := vendor/aquarios/tools/aquarios_process_props.py
-
 PRODUCT_EXTRA_RECOVERY_KEYS += \
   vendor/aquarios/build/target/product/security/aquarios
 
@@ -163,5 +172,60 @@ else
   PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.device.cache_dir=/cache
 endif
+
+# Clean cache
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
+
+# Set AquariOS theme to Aqua (aka Stock)
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.boot.vendor.overlay.theme=com.google.android.theme.stock
+
+# Prebuilt busybox fstrim command
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/bin/fstrim:system/bin/fstrim
+
+# Unlimitted photo storage in Google Photos
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/etc/sysconfig/pixel_2017_exclusive.xml:system/etc/sysconfig/pixel_2017_exclusive.xml
+
+# AquariOS bootanimation 
+-include vendor/aquarios/config/bootanimation.mk
+
+# Packages
+PRODUCT_PACKAGES += \
+    GBoardDarkTheme \
+    SystemUIDarkTheme \
+    SettingsDarkTheme \
+    SystemDarkTheme
+
+# Overlays
+PRODUCT_PACKAGES += \
+    AmberAccent \
+    AquaAccent \
+    BlackAccent \
+    BlueGreyAccent \
+    BrownAccent \
+    CyanAccent \
+    DarkRedAccent \
+    DeepOrangeAccent \
+    DeepPurpleAccent \
+    GreenAccent \
+    GreyAccent \
+    IndigoAccent \
+    LightBlueAccent \
+    LightGreenAccent \
+    LimeAccent \
+    OrangeAccent \
+    PinkAccent \
+    PurpleAccent \
+    RedAccent \
+    YellowAccent \
+    WhiteAccent
+
+# Fonts
+PRODUCT_PACKAGES += \
+    Fonts
+
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)

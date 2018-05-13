@@ -9,8 +9,13 @@ PRODUCT_COPY_FILES += \
 # Telephony packages
 PRODUCT_PACKAGES += \
     CellBroadcastReceiver \
-    Stk
+    Stk \
+    messaging
 
 # Default ringtone
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.config.ringtone=Orion.ogg
+
+# Allow tethering without provisioning app
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tethering.noprovisioning=true
