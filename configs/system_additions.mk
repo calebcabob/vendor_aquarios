@@ -85,3 +85,7 @@ PRODUCT_PACKAGES += \
 # AdBlocking
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/etc/hosts/hosts:system/etc/hosts
+
+# AquariOS custom init file
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/root/init.aquarios.rc:system/etc/init/init.aquarios.rc
