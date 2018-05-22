@@ -84,6 +84,7 @@ PRODUCT_PACKAGES += \
     LatinIME \
     BluetoothExt \
     WallpaperPicker \
+    PrebuiltDeskClockGoogle \
     OmniJaws \
     OmniStyle
 
