@@ -32,7 +32,7 @@ function aquarios_device_combos()
 
     T="$(gettop)"
     list_file="${T}/vendor/aquarios/aquarios.devices"
-    variant="userdebug"
+    variant="user"
 
     if [[ $1 ]]
     then
