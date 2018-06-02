@@ -43,10 +43,10 @@ DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
 custom_local_manifest = ".repo/local_manifests/aquarios_manifest.xml"
-custom_default_revision = "ng7.0"
+custom_default_revision = "a8.1.0-caf"
 custom_dependencies = "aquarios.dependencies"
-org_manifest = "AquariOS"  # leave empty if org is provided in manifest
-org_display = "AquariOS"  # needed for displaying
+org_manifest = "Aqua-devices"  # leave empty if org is provided in manifest
+org_display = "Aqua-devices"  # needed for displaying
 
 github_auth = None
 
