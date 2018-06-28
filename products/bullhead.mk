@@ -16,10 +16,7 @@
 include vendor/aquarios/configs/aquarios_phone.mk
 
 # Inherit AOSP device configuration for bullhead
-$(call inherit-product, device/lge/bullhead/bullhead.mk)
-
-# Inherit gapps for bullhead
-$(call inherit-product, vendor/gapps/arm64/arm64-vendor.mk)
+$(call inherit-product, device/lge/bullhead/aosp_bullhead.mk)
 
 # Bullhead overides
 ifneq ($(filter bullhead,$(PRODUCT_DEVICE)),)
@@ -30,11 +27,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.storage_manager.enabled=true \
     drm.service.enabled=true \
     media.mediadrmservice.enable=true
-
-# exFAT tools
-PRODUCT_PACKAGES += \
-    fsck.exfat \
-    mkfs.exfat
 endif
 
 # Override AOSP build properties
@@ -47,5 +39,5 @@ PRODUCT_MANUFACTURER := LGE
 # Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=bullhead \
-    BUILD_FINGERPRINT="google/bullhead/bullhead:8.1.0/OPM2.171019.029/4657601:user/test-keys" \
-    PRIVATE_BUILD_DESC="bullhead-user 8.1.0 OPM2.171019.029 4657601 test-keys"
+    BUILD_FINGERPRINT=google/bullhead/bullhead:8.1.0/OPM6.171019.030.B1/4768815:user/release-keys \
+    PRIVATE_BUILD_DESC="bullhead-user 8.1.0 OPM6.171019.030.B1 4768815 release-keys"
