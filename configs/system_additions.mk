@@ -47,12 +47,12 @@ PRODUCT_PACKAGES += \
     SettingsDarkTheme \
     SystemDarkTheme
 
-# BlackAF theme
+# Black theme
 PRODUCT_PACKAGES += \
-    DuiBlackAF \
-    GBoardBlackAF \
-    SettingsBlackAF \
-    SystemBlackAF 
+    SystemUIBlackTheme \
+    GboardBlackTheme \
+    SettingsBlackTheme \
+    SystemBlackTheme 
 
 # Overlays
 PRODUCT_PACKAGES += \
