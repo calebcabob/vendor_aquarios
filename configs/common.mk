@@ -22,7 +22,9 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     OmniJaws \
     OmniStyle \
-    WallpaperPickerGooglePrebuilt
+    WallpaperPickerGooglePrebuilt \
+    Turbo \
+    PrebuiltDeskClockGoogle
 
 # Copy Magisk zip
 # PRODUCT_COPY_FILES += \

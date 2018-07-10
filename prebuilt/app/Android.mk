@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := WallpaperPickerGooglePrebuilt
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := WallpaperPickerGooglePrebuilt.apk
+LOCAL_SRC_FILES := WallpaperPickerGooglePrebuilt/WallpaperPickerGooglePrebuilt.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
@@ -30,7 +30,7 @@ include $(BUILD_PREBUILT)
 include $(CLEAR_VARS)
 LOCAL_MODULE := NexusLauncherPrebuilt
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := NexusLauncherPrebuilt.apk
+LOCAL_SRC_FILES := NexusLauncherPrebuilt/NexusLauncherPrebuilt.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
@@ -41,7 +41,7 @@ include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := Turbo
-LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
+LOCAL_SRC_FILES := Turbo/Turbo.apk
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := optional
 LOCAL_CERTIFICATE := platform
@@ -52,19 +52,19 @@ include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := Nova
+LOCAL_SRC_FILES := Nova/Nova.apk
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_BUILT_MODULE_STEM := package.apk
 # Make sure the build system doesn't try to resign the APK
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_DEX_PREOPT := false
-LOCAL_SRC_FILES := Nova.apk
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := PrebuiltDeskClockGoogle
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := PrebuiltDeskClockGoogle.apk
+LOCAL_SRC_FILES := PrebuiltDeskClockGoogle/PrebuiltDeskClockGoogle.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
