@@ -8,7 +8,7 @@
     <color name="smartbar_editor_popup_horiz_separator">@*android:color/accent_device_default_light</color>
 
     <!-- Recents clear all -->
-    <color name="floating_action_button_icon_color">@android:color/black</color>
+    <color name="floating_action_button_icon_color">@*android:color/primary_device_default_dark</color>
 
     <!-- Zen QS panel -->
     <color name="zen_introduction">#ff000000</color>
