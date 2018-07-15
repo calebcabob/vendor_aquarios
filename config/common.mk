@@ -26,6 +26,13 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.config.alarm_alert=Hassium.ogg
 
 # Backup Tool
+ifeq ($(AB_OTA_UPDATER),true)
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
+    vendor/aquarios/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
+    vendor/aquarios/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
+endif
+
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/aquarios/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
