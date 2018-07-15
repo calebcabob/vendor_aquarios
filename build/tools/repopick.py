@@ -121,8 +121,8 @@ def fetch_query(remote_url, query):
         raise Exception('Gerrit URL should be in the form http[s]://hostname/ or ssh://[user@]host[:port]')
 
 if __name__ == '__main__':
-    # Default to AquariOS Gerrit
-    default_gerrit = 'https://review.aquariosroms.org'
+    # Default to AQUARIOS Gerrit
+    default_gerrit = 'https://review.aquariosgzr.com'
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=textwrap.dedent('''\
         repopick.py is a utility to simplify the process of cherry picking
@@ -218,6 +218,8 @@ if __name__ == '__main__':
     for project in projects:
         name = project.get('name')
         path = project.get('path')
+        if path is None:
+            path=name
         revision = project.get('revision')
         if revision is None:
             for remote in remotes:
@@ -236,10 +238,10 @@ if __name__ == '__main__':
     change_numbers = []
     if args.topic:
         reviews = fetch_query(args.gerrit, 'topic:{0}'.format(args.topic))
-        change_numbers = sorted([str(r['number']) for r in reviews], key=int)
+        change_numbers = sorted([str(r['number']) for r in reviews])
     if args.query:
         reviews = fetch_query(args.gerrit, args.query)
-        change_numbers = sorted([str(r['number']) for r in reviews], key=int)
+        change_numbers = sorted([str(r['number']) for r in reviews])
     if args.change_number:
         for c in args.change_number:
             if '-' in c:
@@ -248,7 +250,10 @@ if __name__ == '__main__':
                     change_numbers.append(str(i))
             else:
                 change_numbers.append(c)
-        reviews = fetch_query(args.gerrit, ' OR '.join('change:{0}'.format(x.split('/')[0]) for x in change_numbers))
+        try:
+            reviews = fetch_query(args.gerrit, ' OR '.join('change:{0}'.format(x.split('/')[0]) for x in change_numbers))
+        except urllib2.HTTPError:
+            reviews = fetch_query(args.gerrit[0:-1], ' OR '.join('change:{0}'.format(x.split('/')[0]) for x in change_numbers))
 
     # make list of things to actually merge
     mergables = []
@@ -274,7 +279,7 @@ if __name__ == '__main__':
 
         mergables.append({
             'subject': review['subject'],
-            'project': review['project'],
+            'project': review['project'].split('/')[1],
             'branch': review['branch'],
             'change_id': review['change_id'],
             'change_number': review['number'],
@@ -364,8 +369,6 @@ if __name__ == '__main__':
                 cmd = ['git fetch github', item['fetch'][method]['ref']]
             if args.quiet:
                 cmd.append('--quiet')
-            else:
-                print(cmd)
             result = subprocess.call([' '.join(cmd)], cwd=project_path, shell=True)
             FETCH_HEAD = '{0}/.git/FETCH_HEAD'.format(project_path)
             if result != 0 and os.stat(FETCH_HEAD).st_size != 0:
@@ -386,12 +389,11 @@ if __name__ == '__main__':
                 cmd = ['git fetch', item['fetch'][method]['url'], item['fetch'][method]['ref']]
             if args.quiet:
                 cmd.append('--quiet')
-            else:
-                print(cmd)
             result = subprocess.call([' '.join(cmd)], cwd=project_path, shell=True)
             if result != 0:
                 print('ERROR: git command failed')
                 sys.exit(result)
+
         # Perform the cherry-pick
         if not args.pull:
             cmd = ['git cherry-pick FETCH_HEAD']

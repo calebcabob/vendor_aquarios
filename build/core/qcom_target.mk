@@ -3,6 +3,10 @@
 # Bring in Qualcomm helper macros
 include vendor/aquarios/build/core/qcom_utils.mk
 
+# Populate the qcom hardware variants in the project pathmap.
+define ril-set-path-variant
+$(call project-set-path-variant,ril,TARGET_RIL_VARIANT,hardware/$(1))
+endef
 define wlan-set-path-variant
 $(call project-set-path-variant,wlan,TARGET_WLAN_VARIANT,hardware/qcom/$(1))
 endef
@@ -29,6 +33,12 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
     UM_4_9_FAMILY := sdm845
     UM_PLATFORMS := $(UM_3_18_FAMILY) $(UM_4_4_FAMILY) $(UM_4_9_FAMILY)
 
+    ifeq ($(TARGET_USES_UM_PLATFORM),true)
+        UM_3_18_FAMILY += $(BR_FAMILY)
+        # Empty the BR_FAMILY variable so the platform doesn't match it
+        BR_FAMILY :=
+    endif
+
     BOARD_USES_ADRENO := true
 
     # UM platforms no longer need this set on O+
@@ -40,7 +50,6 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
     TARGET_COMPILE_WITH_MSM_KERNEL := true
 
     ifneq ($(filter msm7x27a msm7x30 msm8660 msm8960,$(TARGET_BOARD_PLATFORM)),)
-        TARGET_USES_QCOM_BSP_LEGACY := true
         # Enable legacy audio functions
         ifeq ($(BOARD_USES_LEGACY_ALSA_AUDIO),true)
             USE_CUSTOM_AUDIO_POLICY := 1
@@ -106,9 +115,8 @@ $(call set-device-specific-path,SENSORS,sensors,hardware/qcom/sensors)
 $(call set-device-specific-path,LOC_API,loc-api,vendor/qcom/opensource/location)
 $(call set-device-specific-path,DATASERVICES,dataservices,vendor/qcom/opensource/dataservices)
 $(call set-device-specific-path,POWER,power,hardware/qcom/power)
-$(call set-device-specific-path,THERMAL,thermal,hardware/qcom/thermal)
-$(call set-device-specific-path,VR,vr,hardware/qcom/vr)
 
+$(call ril-set-path-variant,ril)
 $(call wlan-set-path-variant,wlan-caf)
 $(call bt-vendor-set-path-variant,bt-caf)
 
@@ -124,6 +132,7 @@ $(call project-set-path,qcom-sensors,hardware/qcom/sensors)
 $(call project-set-path,qcom-loc-api,vendor/qcom/opensource/location)
 $(call project-set-path,qcom-dataservices,$(TARGET_DEVICE_DIR)/dataservices)
 
+$(call ril-set-path-variant,ril)
 $(call wlan-set-path-variant,wlan)
 $(call bt-vendor-set-path-variant,bt)
 

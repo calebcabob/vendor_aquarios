@@ -3,21 +3,21 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 include vendor/aquarios/config/aosp_fixes.mk
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=android-google
 else
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
 endif
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
 
 # Disable excessive dalvik debug messages
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.debug.alloc=0
 
 # Default sounds
@@ -29,7 +29,12 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/aquarios/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/aquarios/prebuilt/common/bin/50-aquarios.sh:system/addon.d/50-aquarios.sh
+    vendor/aquarios/prebuilt/common/bin/50-aquarios.sh:system/addon.d/50-aquarios.sh \
+    vendor/aquarios/prebuilt/common/bin/clean_cache.sh:system/bin/clean_cache.sh
+
+# Backup services whitelist
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
@@ -37,11 +42,15 @@ PRODUCT_COPY_FILES += \
 
 # AQUARIOS-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/aquarios/prebuilt/common/etc/init.aquarios.rc:system/etc/init/init.aquarios.rc
+    vendor/aquarios/prebuilt/common/etc/init.local.rc:root/init.aquarios.rc
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/aquarios/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    vendor/aquarios/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+
+# SELinux filesystem labels
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -52,16 +61,23 @@ PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
     vendor/aquarios/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
-# debug packages
-ifneq ($(TARGET_BUILD_VARIENT),user)
-PRODUCT_PACKAGES += \
-    Development
-endif
+# Fix Dialer
+#PRODUCT_COPY_FILES +=  \
+#    vendor/aquarios/prebuilt/common/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
 
-# TWRP
-ifeq ($(WITH_TWRP),true)
-include vendor/aquarios/config/twrp.mk
-endif
+# Aquarios-specific startup services
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/aquarios/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
+    vendor/aquarios/prebuilt/common/bin/sysinit:system/bin/sysinit
+
+# Required packages
+PRODUCT_PACKAGES += \
+    CellBroadcastReceiver \
+    Development \
+    SpareParts \
+    LockClock \
+    su
 
 # Optional packages
 PRODUCT_PACKAGES += \
@@ -104,7 +120,11 @@ PRODUCT_PACKAGES += \
 # exFAT tools
 PRODUCT_PACKAGES += \
     fsck.exfat \
-    mkfs.exfat
+    mkfs.exfat \
+    ntfsfix \
+    ntfs-3g
+PRODUCT_PACKAGES += \
+    charger_res_images
 
 # DU Utils Library
 PRODUCT_PACKAGES += \
@@ -119,7 +139,7 @@ PRODUCT_PACKAGES += \
     libffmpeg_omx \
     media_codecs_ffmpeg.xml
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     media.sf.omx-plugin=libffmpeg_omx.so \
     media.sf.extractor-plugin=libffmpeg_extractor.so
 
@@ -132,6 +152,7 @@ PRODUCT_PACKAGE_OVERLAYS += \
 PRODUCT_VERSION_MAJOR = $(PLATFORM_VERSION)
 PRODUCT_VERSION_MINOR = r
 PRODUCT_VERSION_MAINTENANCE = 40
+AQUARIOS_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 ifdef AQUARIOS_BUILD_EXTRA
     AQUARIOS_POSTFIX := -$(AQUARIOS_BUILD_EXTRA)
 endif
@@ -148,85 +169,17 @@ ifndef AQUARIOS_POSTFIX
 endif
 
 # Set all versions
-AQUARIOS_VERSION := 8.1
-AQUARIOS_MOD_VERSION := AquariOS-$(AQUARIOS_BUILD)-$(PRODUCT_VERSION_MAJOR)_$(PRODUCT_VERSION_MINOR)$(PRODUCT_VERSION_MAINTENANCE)-$(AQUARIOS_BUILD_TYPE)$(AQUARIOS_POSTFIX)
+AQUARIOS_VERSION := Aquarios-$(AQUARIOS_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(AQUARIOS_BUILD_TYPE)$(AQUARIOS_POSTFIX)
+AQUARIOS_MOD_VERSION := Aquarios-$(AQUARIOS_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(AQUARIOS_BUILD_TYPE)$(AQUARIOS_POSTFIX)
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
     aquarios.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
     ro.aquarios.version=$(AQUARIOS_VERSION) \
     ro.modversion=$(AQUARIOS_MOD_VERSION) \
     ro.aquarios.buildtype=$(AQUARIOS_BUILD_TYPE)
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.aquarios.version=$(AQUARIOS_VERSION) \
+# Google sounds
+include vendor/aquarios/google/GoogleAudio.mk
 
-PRODUCT_EXTRA_RECOVERY_KEYS += \
-  vendor/aquarios/build/target/product/security/aquarios
-
--include vendor/aquarios-priv/keys/keys.mk
-
-ifeq ($(BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE),)
-  PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.device.cache_dir=/data/cache
-else
-  PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.device.cache_dir=/cache
-endif
-
-# Clean cache
-PRODUCT_COPY_FILES += \
-    vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
-
-# Set AquariOS theme to Aqua (aka Stock)
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.boot.vendor.overlay.theme=com.google.android.theme.stock
-
-# Prebuilt busybox fstrim command
-PRODUCT_COPY_FILES += \
-    vendor/aquarios/prebuilt/bin/fstrim:system/bin/fstrim
-
-# Unlimitted photo storage in Google Photos
-PRODUCT_COPY_FILES += \
-    vendor/aquarios/prebuilt/etc/sysconfig/pixel_2017_exclusive.xml:system/etc/sysconfig/pixel_2017_exclusive.xml
-
-# AquariOS bootanimation 
--include vendor/aquarios/config/bootanimation.mk
-
-# Packages
-PRODUCT_PACKAGES += \
-    GBoardDarkTheme \
-    SystemUIDarkTheme \
-    SettingsDarkTheme \
-    SystemDarkTheme
-
-# Overlays
-PRODUCT_PACKAGES += \
-    AmberAccent \
-    AquaAccent \
-    BlackAccent \
-    BlueGreyAccent \
-    BrownAccent \
-    CyanAccent \
-    DarkRedAccent \
-    DeepOrangeAccent \
-    DeepPurpleAccent \
-    GreenAccent \
-    GreyAccent \
-    IndigoAccent \
-    LightBlueAccent \
-    LightGreenAccent \
-    LimeAccent \
-    OrangeAccent \
-    PinkAccent \
-    PurpleAccent \
-    RedAccent \
-    YellowAccent \
-    WhiteAccent
-
-# Fonts
-PRODUCT_PACKAGES += \
-    Fonts
-
-
-$(call prepend-product-if-exists, vendor/extra/product.mk)
+EXTENDED_POST_PROCESS_PROPS := vendor/aquarios/tools/aquarios_process_props.py
