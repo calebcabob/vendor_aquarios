@@ -60,7 +60,8 @@ function aquarios_device_combos()
 
     while IFS= read -r device
     do
-        add_lunch_combo "aquarios_${device}-${variant}"
+        add_lunch_combo "aquarios_${device}-${variant1}"
+        add_lunch_combo "aquarios_${device}-${variant2}"
     done < "${list_file}"
 }
 
