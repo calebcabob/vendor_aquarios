@@ -1,4 +1,4 @@
-# aquarios Extras
+# AquariOS Extras
 
 on init
     export TERMINFO /system/etc/terminfo

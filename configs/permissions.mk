@@ -11,11 +11,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Assure these are being added
-PRODUCT_PACKAGES += \
-    privapp-permissions-google.xml
-
-# Backup Services whitelist
-PRODUCT_COPY_FILES += \
-    vendor/aquarios/prebuilt/etc/permissions/backup.xml:system/etc/sysconfig/backup.xml

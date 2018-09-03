@@ -1,4 +1,4 @@
-# Copyright (C) 2017 AquariOS
+# Copyright (C) 2018 AquariOS
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,34 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include vendor/aquarios/configs/aosp_fixes.mk
+# Include common makefile
 include vendor/aquarios/configs/common.mk
-include vendor/aquarios/configs/system_additions.mk
 
 # Telephony packages
 PRODUCT_PACKAGES += \
     Stk \
     CellBroadcastReceiver
 
-# Allow tethering without provisioning app
-PRODUCT_PROPERTY_OVERRIDES += \
-    net.tethering.noprovisioning=true
-
 # Thank you, please drive thru!
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.dun.override=0
-
-# Set AquariOS theme to Aqua (aka Stock)
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.boot.vendor.overlay.theme=com.google.android.theme.stock
-
-# TEMP: Force enable VoLTE/VoWiFi until it's able to be fixed properly
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.dbg.ims_volte_enable=1 \
-    persist.dbg.volte_avail_ovr=1 \
-    persist.dbg.wfc_avail_ovr=1 \
-    persist.radio.calls.on.ims=1 \
-    persist.radio.rat_on=combine
+    persist.sys.dun.override=0 \
+    net.tethering.noprovisioning=true
 
 # World APN list
 PRODUCT_COPY_FILES += \
@@ -56,3 +40,11 @@ PRODUCT_COPY_FILES += \
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/etc/APNs/sensitive_pn.xml:system/etc/sensitive_pn.xml
+
+# TEMP: Force enable VoLTE/VoWiFi until it's able to be fixed properly
+#PRODUCT_PROPERTY_OVERRIDES += \
+#   persist.dbg.ims_volte_enable=1 \
+#   persist.dbg.volte_avail_ovr=1 \
+#   persist.dbg.wfc_avail_ovr=1 \
+#   persist.radio.calls.on.ims=1 \
+#   persist.radio.rat_on=combine

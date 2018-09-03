@@ -1,4 +1,4 @@
-# Copyright (C) 2017 AquariOS
+# Copyright (C) 2018 AquariOS
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,60 +13,43 @@
 # limitations under the License.
 
 # Include overlays
-PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/aquarios/overlay/common
+#PRODUCT_PACKAGE_OVERLAYS += \
+#   vendor/aquarios/overlay/common
 
-# Main Required Packages
-PRODUCT_PACKAGES += \
-    Launcher3 \
-    LiveWallpapersPicker \
-    OmniJaws \
-    OmniStyle \
-    WallpaperPickerGooglePrebuilt \
-    Turbo \
-    PrebuiltDeskClockGoogle
+# Include some other segments
+include vendor/aquarios/configs/aquarios_defaults.mk
+include vendor/aquarios/configs/packages.mk
+include vendor/aquarios/configs/permissions.mk
+include vendor/aquarios/configs/system_fixes.mk
 
-# Copy Magisk zip
-# PRODUCT_COPY_FILES += \
-#    vendor/aquarios/prebuilt/zip/magisk.zip:system/addon.d/magisk.zip
-
-# AquariOS bootanimation 
--include vendor/aquarios/configs/bootanimation.mk
-
-# init.d script support
+# Proprietary latinIME libs needed for keyboard swype gestures
+ifneq ($(filter shamu,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES += \
-    vendor/aquarios/prebuilt/bin/sysinit:system/bin/sysinit \
-    vendor/aquarios/prebuilt/root/init.aquarios.rc:root/init.aquarios.rc
-
-# AquariOS versioning
-ifndef AQUARIOS_BUILD_TYPE
-    AQUARIOS_BUILD_TYPE := UNOFFICIAL
+    vendor/aquarios/prebuilt/lib/libjni_latinime.so:system/lib/libjni_latinime.so \
+    vendor/aquarios/prebuilt/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+else
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so \
+    vendor/aquarios/prebuilt/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so
 endif
 
-AQUARIOS_VERSION := $(PLATFORM_VERSION)-$(AQUARIOS_BUILD_TYPE)-$(shell date +%Y%m%d-%H%M)
-
+# Google property overides
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.aquarios.version=$(AQUARIOS_VERSION)
+    keyguard.no_require_sim=true \
+    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
+    ro.com.google.clientidbase=android-google \
+    ro.error.receiver.system.apps=com.google.android.gms \
+    ro.setupwizard.enterprise_mode=1 \
+    ro.com.android.dataroaming=false \
+    ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent \
+    ro.setupwizard.rotation_locked=true \
+    ro.actionable_compatible_property.enabled=false
 
-# DU Utils Library
-PRODUCT_PACKAGES += \
-    org.dirtyunicorns.utils
-
-PRODUCT_BOOT_JARS += \
-    org.dirtyunicorns.utils
-
-# Include explicitly to work around GMS issues
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-full \
-    librsjni
-
-# Clean cache
-PRODUCT_COPY_FILES += \
-    vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
+# Security Enhanced Linux
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=1
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/root/mkshrc:system/etc/mkshrc
-
-# AquariOS permissions 
--include vendor/aquarios/configs/permissions.mk
