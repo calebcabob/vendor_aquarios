@@ -13,13 +13,13 @@
 # limitations under the License.
 
 # Include aquarios phone config
-include vendor/aquarios/configs/aquarios_phone.mk
+include vendor/aquarios/configs/common.mk
 
 # Call some device specific files for taimen
 $(call inherit-product, device/google/taimen/aquarios.mk)
 
 # Include AmbientSense if it's available
--include vendor/ambientmusic/AmbientMusic.mk
+#-include vendor/ambientmusic/AmbientMusic.mk
 
 # Override AOSP build properties
 PRODUCT_NAME := taimen
@@ -31,5 +31,5 @@ PRODUCT_MANUFACTURER := Google
 # Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=taimen \
-    BUILD_FINGERPRINT=google/taimen/taimen:8.1.0/OPM2.171026.006.H1/4833802:user/release-keys \
-    PRIVATE_BUILD_DESC="taimen-user 8.1.0 OPM2.171026.006.H1 4833802 release-keys"
+    BUILD_FINGERPRINT=google/taimen/taimen:9/PPR1.180610.009/4898911:user/release-keys \
+    PRIVATE_BUILD_DESC="taimen-user 9 PPR1.180610.009 4898911 release-keys"
