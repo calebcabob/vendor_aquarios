@@ -18,11 +18,12 @@ ifndef AQUARIOS_BUILD_TYPE
 endif
 
 # AquariOS build naming
-AQUARIOS_VERSION := $(PLATFORM_VERSION)-$(AQUARIOS_BUILD_TYPE)-$(shell date +%Y%m%d-%H%M)
+AQUARIOS_VERSION := $(PLATFORM_VERSION)_$(AQUARIOS_BUILD_TYPE)_$(shell date +%m.%e.%Y-%I.%M%P)
 
 # AquariOS build properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.aquarios.version=$(AQUARIOS_VERSION)
+    ro.aquarios.version=$(AQUARIOS_VERSION) \
+    ro.aquarios.type=$(AQUARIOS_BUILD_TYPE)
 
 # Include AquariOS boot animation
 ifneq (1080,$(TARGET_SCREEN_WIDTH))
