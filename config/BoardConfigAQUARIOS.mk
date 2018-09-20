@@ -4,5 +4,5 @@
 #endif
 
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-include vendor/gzosp/config/BoardConfigQcom.mk
+include vendor/aquarios/config/BoardConfigQcom.mk
 endif
