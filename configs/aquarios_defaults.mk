@@ -18,7 +18,7 @@ ifndef AQUARIOS_BUILD_TYPE
 endif
 
 # AquariOS build naming
-AQUARIOS_VERSION := $(PLATFORM_VERSION)_$(AQUARIOS_BUILD_TYPE)_$(shell date +%m.%e.%Y-%I.%M%P)
+AQUARIOS_VERSION := $(PLATFORM_VERSION)_$(AQUARIOS_BUILD_TYPE)_$(shell date +%m.%e.%Y-%H%M)
 
 # AquariOS build properties
 PRODUCT_PROPERTY_OVERRIDES += \
