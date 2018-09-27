@@ -24,3 +24,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librsjni
+
+# AdBlocking
+PRODUCT_COPY_FILES += \
+    vendor/aquarios/prebuilt/etc/hosts/hosts:system/etc/hosts
