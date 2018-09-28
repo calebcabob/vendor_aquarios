@@ -21,6 +21,7 @@ include vendor/aquarios/configs/aquarios_defaults.mk
 include vendor/aquarios/configs/packages.mk
 include vendor/aquarios/configs/permissions.mk
 include vendor/aquarios/configs/system_fixes.mk
+include vendor/aquarios/configs/themes.mk
 
 # Proprietary latinIME libs needed for keyboard swype gestures
 ifneq ($(filter shamu,$(TARGET_PRODUCT)),)
