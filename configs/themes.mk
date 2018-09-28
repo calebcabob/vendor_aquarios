@@ -40,6 +40,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SettingsDarkTheme \
     SystemDarkTheme \
+    SysuiQsDarkTheme \
     GBoardDarkTheme
 
 
