@@ -13,23 +13,13 @@
 # limitations under the License.
 
 # Include aquarios phone config
-include vendor/aquarios/configs/aquarios_phone.mk
-
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+include vendor/aquarios/configs/common.mk
 
 # Call some device specific files for walleye
 $(call inherit-product, device/google/walleye/aquarios.mk)
-$(call inherit-product, device/google/walleye/device-walleye.mk)
-$(call inherit-product, vendor/google/walleye/walleye-vendor.mk)
-
-# Audio effects
-PRODUCT_COPY_FILES += \
-    device/google/walleye/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
 # Include AmbientSense if it's available
--include vendor/ambientmusic/AmbientMusic.mk
+#-include vendor/ambientmusic/AmbientMusic.mk
 
 # Override AOSP build properties
 PRODUCT_NAME := walleye
@@ -41,5 +31,6 @@ PRODUCT_MANUFACTURER := Google
 # Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=walleye \
-    BUILD_FINGERPRINT=google/walleye/walleye:8.1.0/OPM2.171026.006.G1/4820017:user/release-keys \
-    PRIVATE_BUILD_DESC="walleye-user 8.1.0 OPM2.171026.006.G1 4820017 release-keys"
+    PRIVATE_BUILD_DESC="walleye-user 9 PPR2.180905.005 4928864 release-keys"
+
+BUILD_FINGERPRINT := google/walleye/walleye:9/PPR2.180905.005/4928864:user/release-keys
