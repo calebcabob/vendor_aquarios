@@ -18,7 +18,8 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     WallpaperPickerGooglePrebuilt \
     Turbo \
-    PrebuiltDeskClockGoogle
+    PrebuiltDeskClockGoogle \
+    Nova
 
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
