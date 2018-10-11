@@ -40,8 +40,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SettingsDarkTheme \
     SystemDarkTheme \
+    SystemUIDarkTheme \
     SysuiQsDarkTheme \
-    GBoardDarkTheme
+    GBoardDarkTheme \
+    SettingsBlackTheme \
+    SystemBlackTheme \
+    SystemUIBlackTheme \
+    SysuiQsBlackTheme \
+    GBoardBlackTheme
 
 
 
