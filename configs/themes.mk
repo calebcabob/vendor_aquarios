@@ -14,27 +14,27 @@
 
 # Accents
 PRODUCT_PACKAGES += \
-    AmberAccent \
-    AquaAccent \
-    BlackAccent \
-    BlueGreyAccent \
-    BrownAccent \
-    CyanAccent \
-    DarkRedAccent \
-    DeepOrangeAccent \
-    DeepPurpleAccent \
-    GreenAccent \
-    GreyAccent \
-    IndigoAccent \
-    LightBlueAccent \
-    LightGreenAccent \
-    LimeAccent \
-    OrangeAccent \
-    PinkAccent \
-    PurpleAccent \
-    RedAccent \
-    YellowAccent \
-    WhiteAccent
+    Amber \
+    Black \
+    Blue \
+    BlueGrey \
+    Brown \
+    Cyan \
+    DeepOrange \
+    DeepPurple \
+    Green \
+    Grey \
+    Indigo \
+    LightBlue \
+    LightGreen \
+    Lime \
+    Orange \
+    Pink \
+    Purple \
+    Red \
+    Teal \
+    Yellow \
+    White
 
 # Dark theme
 PRODUCT_PACKAGES += \
@@ -47,7 +47,11 @@ PRODUCT_PACKAGES += \
     SystemBlackTheme \
     SystemUIBlackTheme \
     SysuiQsBlackTheme \
-    GBoardBlackTheme
-
-
-
+    GBoardBlackTheme \
+    UserOne \
+    UserTwo \
+    UserThree \
+    UserFour \
+    UserFive \
+    UserSix \
+    UserSeven
