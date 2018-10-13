@@ -13,6 +13,10 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+
+	 General description:
+	 Circle with clean outline/boarder to it
+
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="40dp"
