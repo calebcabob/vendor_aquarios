@@ -25,16 +25,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.aquarios.version=$(AQUARIOS_VERSION) \
     ro.aquarios.type=$(AQUARIOS_BUILD_TYPE)
 
-# Include AquariOS boot animation
-ifneq (1080,$(TARGET_SCREEN_WIDTH))
-    PRODUCT_COPY_FILES += \
-        vendor/aquarios/prebuilt/bootanimation/1080.zip:system/media/bootanimation.zip
-endif
-ifneq (1440,$(TARGET_SCREEN_WIDTH))
-    PRODUCT_COPY_FILES += \
-        vendor/aquarios/prebuilt/bootanimation/1440.zip:system/media/bootanimation.zip
-endif
-
 # SystemUI Tests
 EXCLUDE_SYSTEMUI_TESTS := true
 
