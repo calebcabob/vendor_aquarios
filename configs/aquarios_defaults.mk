@@ -21,7 +21,7 @@ TARGET_PRODUCT_SHORT := $(subst aqua_,,$(AQUARIOS_BUILD_TYPE))
 
 # AquariOS build naming
 AQUARIOS_VERSION := $(PLATFORM_VERSION)_$(AQUARIOS_BUILD_TYPE)_$(shell date +%m.%d.%Y-%H%M)
-ROM_FINGERPRINT := AquariOS/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(shell date +%Y%m%d)
+ROM_FINGERPRINT := AquariOS/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(shell date -u +%H%M)
 
 # AquariOS build properties
 PRODUCT_PROPERTY_OVERRIDES += \
