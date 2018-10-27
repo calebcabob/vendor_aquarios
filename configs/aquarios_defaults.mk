@@ -17,13 +17,17 @@ ifndef AQUARIOS_BUILD_TYPE
     AQUARIOS_BUILD_TYPE := UNOFFICIAL
 endif
 
+TARGET_PRODUCT_SHORT := $(subst aqua_,,$(AQUARIOS_BUILD_TYPE))
+
 # AquariOS build naming
 AQUARIOS_VERSION := $(PLATFORM_VERSION)_$(AQUARIOS_BUILD_TYPE)_$(shell date +%m.%d.%Y-%H%M)
+ROM_FINGERPRINT := AquariOS/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(shell date +%Y%m%d)
 
 # AquariOS build properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.aquarios.version=$(AQUARIOS_VERSION) \
-    ro.aquarios.type=$(AQUARIOS_BUILD_TYPE)
+    ro.aquarios.type=$(AQUARIOS_BUILD_TYPE) \
+    ro.aqua.fingerprint=$(ROM_FINGERPRINT)
 
 # SystemUI Tests
 EXCLUDE_SYSTEMUI_TESTS := true

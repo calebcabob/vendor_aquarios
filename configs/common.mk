@@ -54,9 +54,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/root/mkshrc:system/etc/mkshrc
 
-# Clean cache
-PRODUCT_COPY_FILES += \
-    vendor/aquarios/tools/clean_cache.sh:system/bin/clean_cache.sh
-
 # Vendor/themes
 $(call inherit-product, vendor/assets/common.mk)
