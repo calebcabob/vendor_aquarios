@@ -13,8 +13,8 @@
 # limitations under the License.
 
 # Include overlays
-#PRODUCT_PACKAGE_OVERLAYS += \
-#   vendor/aquarios/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += \
+   vendor/aquarios/overlay/common
 
 # Include some other segments
 include vendor/aquarios/configs/aquarios_defaults.mk
