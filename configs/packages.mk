@@ -20,6 +20,10 @@ PRODUCT_PACKAGES += \
     Turbo \
     PrebuiltDeskClockGoogle
 
+# Custom feature packages
+PRODUCT_PACKAGES += \
+    AmbientPlayHistoryProvider
+
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
