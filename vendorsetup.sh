@@ -6,4 +6,4 @@ add_lunch_combo taimen-userdebug
 add_lunch_combo shamu-userdebug
 add_lunch_combo walleye-userdebug
 add_lunch_combo berkeley-userdebug
-
+add_lunch_combo crosshatch-userdebug
