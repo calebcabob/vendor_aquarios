@@ -37,7 +37,7 @@ PRODUCT_COPY_FILES += \
 endif
 
 # Google property overides
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     keyguard.no_require_sim=true \
     dalvik.vm.debug.alloc=0 \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
@@ -55,7 +55,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.ime.theme_id=5
 
 # Security Enhanced Linux
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.build.selinux=1
 
 # Don't export PS1 in /system/etc/mkshrc.
@@ -64,10 +64,10 @@ PRODUCT_COPY_FILES += \
 
 # Disable Rescue Party for all except on ENG builds
 ifeq ($(TARGET_BUILD_VARIANT),eng)
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.disable_rescue=0
 else
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.disable_rescue=1
 endif
 

@@ -21,7 +21,7 @@ PRODUCT_PACKAGES += \
     CellBroadcastReceiver
 
 # Thank you, please drive thru!
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.dun.override=0 \
     net.tethering.noprovisioning=true
 
@@ -42,7 +42,7 @@ PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/etc/APNs/sensitive_pn.xml:system/etc/sensitive_pn.xml
 
 # TEMP: Force enable VoLTE/VoWiFi until it's able to be fixed properly
-#PRODUCT_PROPERTY_OVERRIDES += \
+#PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
    persist.dbg.ims_volte_enable=1 \
    persist.dbg.volte_avail_ovr=1 \
    persist.dbg.wfc_avail_ovr=1 \

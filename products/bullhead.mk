@@ -17,7 +17,7 @@ $(call inherit-product, device/lge/bullhead/aquarios.mk)
 
 # Bullhead overides
 ifneq ($(filter bullhead,$(PRODUCT_DEVICE)),)
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.debug.alloc=0 \
     ro.carrier=unknown \
     ro.opa.eligible_device=true \
