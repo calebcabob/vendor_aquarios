@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include aquarios phone config
-include vendor/aquarios/configs/common.mk
-
 # Call some device specific files for taimen
 $(call inherit-product, device/google/taimen/aquarios.mk)
 

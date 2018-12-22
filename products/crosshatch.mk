@@ -16,7 +16,7 @@
 include vendor/aquarios/configs/aquarios_phone.mk
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/google/crosshatch/aosp_crosshatch.mk)
+$(call inherit-product, device/google/crosshatch/aquarios.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
@@ -34,5 +34,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 BUILD_FINGERPRINT := google/crosshatch/crosshatch:9/PQ1A.181205.006/5108886:user/release-keys
 
-$(call inherit-product-if-exists, vendor/google/crosshatch/crosshatch-vendor.mk)
-$(call inherit-product-if-exists, vendor/pixelgapps/pixel-gapps.mk)
+$(call inherit-product, vendor/google/crosshatch/crosshatch-vendor.mk)
+$(call inherit-product, vendor/pixelgapps/pixel-gapps.mk)
