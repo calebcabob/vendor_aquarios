@@ -36,4 +36,4 @@ EXCLUDE_SYSTEMUI_TESTS := true
 USE_CCACHE := true
 
 # Try ThinLTO cache
-# USE_THINLTO_CACHE=true
+USE_THINLTO_CACHE=true
