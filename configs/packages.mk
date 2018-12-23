@@ -18,7 +18,8 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     WallpaperPickerGooglePrebuilt \
     Turbo \
-    PrebuiltDeskClockGoogle
+    PrebuiltDeskClockGoogle \
+    WeatherClient
 
 # Custom feature packages
 PRODUCT_PACKAGES += \
