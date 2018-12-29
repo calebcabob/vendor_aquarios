@@ -126,4 +126,7 @@
     -->
     <bool name="config_enableWifiDisplay">true</bool>
 
+    <!-- Disable Always On Display by default -->
+    <bool name="config_dozeAlwaysOnEnabled">false</bool>
+
 </resources>
