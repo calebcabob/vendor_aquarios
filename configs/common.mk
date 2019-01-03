@@ -58,5 +58,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     vendor/aquarios/prebuilt/root/mkshrc:system/etc/mkshrc
 
+# Disable Rescue Party for all except on ENG builds
+ifeq ($(TARGET_BUILD_VARIANT),eng)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.disable_rescue=0
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.disable_rescue=1
+endif
+
 # Vendor/themes
 $(call inherit-product, vendor/assets/common.mk)
