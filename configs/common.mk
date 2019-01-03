@@ -67,5 +67,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.disable_rescue=1
 endif
 
+# Disable ADB security for all except on ENG builds
+ifeq ($(TARGET_BUILD_VARIANT),eng)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.adb.secure=0
+else
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.adb.secure=1
+endif
+
 # Vendor/themes
 $(call inherit-product, vendor/assets/common.mk)
