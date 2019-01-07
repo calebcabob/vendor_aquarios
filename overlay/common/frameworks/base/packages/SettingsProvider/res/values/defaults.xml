@@ -17,7 +17,19 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Googles Backup transport service -->
     <string name="def_backup_transport">com.google.android.gms/.backup.BackupTransportService</string>
+
     <bool name="def_bluetooth_on">false</bool>
+
     <bool name="def_install_non_market_apps">true</bool>
+
+    <!-- Power & keyguard sounds -->
+    <integer name="def_lockscreen_sounds_enabled">0</integer>
+    <integer name="def_power_sounds_enabled">0</integer>
+
+    <!-- Link/unlink notification & ringer volumes -->
+    <bool name="def_notifications_use_ring_volume">false</bool>
+
+    <!-- Default for UI touch sounds enabled -->
+    <bool name="def_sound_effects_enabled">false</bool>
 
 </resources> 
