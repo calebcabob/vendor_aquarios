@@ -1,9 +1,5 @@
 add_lunch_combo angler-userdebug
 add_lunch_combo bullhead-userdebug
-add_lunch_combo sailfish-userdebug
-add_lunch_combo marlin-userdebug
 add_lunch_combo taimen-userdebug
-add_lunch_combo shamu-userdebug
 add_lunch_combo walleye-userdebug
-add_lunch_combo berkeley-userdebug
 add_lunch_combo crosshatch-userdebug

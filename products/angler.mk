@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include aquarios telephony configuration
-include vendor/aquarios/configs/aquarios_phone.mk
-
 # Inherit AOSP device configuration for angler
 $(call inherit-product, device/huawei/angler/aquarios.mk)
 
@@ -28,9 +25,6 @@ PRODUCT_MANUFACTURER := Huawei
 # Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=angler \
-    BUILD_FINGERPRINT=google/angler/angler:8.1.0/OPM6.171019.030.E1/4805388:user/release-keys \
-    PRIVATE_BUILD_DESC="angler-user OPM6.171019.030.E1 4805388 release-keys"
+    PRIVATE_BUILD_DESC="angler-user 8.1.0 OPM7.181205.001 5080180 release-keys"
 
-# Include per devices
-PRODUCT_PACKAGES += \
-    Camera2
+BUILD_FINGERPRINT := google/angler/angler:8.1.0/OPM7.181205.001/5080180:user/release-keys
