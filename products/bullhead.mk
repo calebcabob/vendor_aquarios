@@ -16,7 +16,7 @@
 include vendor/aquarios/configs/aquarios_phone.mk
 
 # Inherit AOSP device configuration for bullhead
-$(call inherit-product, device/lge/bullhead/aosp_bullhead.mk)
+$(call inherit-product, device/lge/bullhead/aquarios.mk)
 
 # Bullhead overides
 ifneq ($(filter bullhead,$(PRODUCT_DEVICE)),)
