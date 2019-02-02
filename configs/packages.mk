@@ -14,6 +14,7 @@
 
 # Main Required Packages
 PRODUCT_PACKAGES += \
+    CustomDoze\
     Launcher3 \
     LiveWallpapersPicker \
     WallpaperPickerGooglePrebuilt \
