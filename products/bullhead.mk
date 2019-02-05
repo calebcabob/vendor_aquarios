@@ -24,12 +24,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.storage_manager.enabled=true \
     drm.service.enabled=true \
     media.mediadrmservice.enable=true \
-    ro.com.android.prov_mobiledata=false \
-    setupwizard.theme=glif_v2_light \
-    ro.facelock.black_timeout=700 \
-	ro.facelock.det_timeout=2500 \
-	ro.facelock.rec_timeout=3500 \
-	ro.facelock.est_max_time=600
+    ro.com.android.prov_mobiledata=false
 
 endif
 
