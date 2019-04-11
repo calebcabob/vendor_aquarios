@@ -45,6 +45,5 @@ PRODUCT_COPY_FILES += \
 #PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
    persist.dbg.ims_volte_enable=1 \
    persist.dbg.volte_avail_ovr=1 \
-   persist.dbg.wfc_avail_ovr=1 \
    persist.radio.calls.on.ims=1 \
    persist.radio.rat_on=combine
