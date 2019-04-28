@@ -149,4 +149,7 @@
     <!-- Component name for default assistant on this device -->
     <string name="config_defaultAssistantComponentName">com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService</string>
 
+    <!-- Whether or not swipe up gesture (navbar) is available on all supported devices -->
+    <bool name="config_swipe_up_gesture_setting_available">true</bool>
+
 </resources>
