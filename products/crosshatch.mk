@@ -30,9 +30,9 @@ PRODUCT_MANUFACTURER := Google
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=crosshatch \
-    PRIVATE_BUILD_DESC="crosshatch-user 9 PQ3A.190505.002/5450365 release-keys"
+    PRIVATE_BUILD_DESC="crosshatch-user 9 PQ3A.190605.003 5524043 release-keys"
 
-BUILD_FINGERPRINT := google/crosshatch/crosshatch:9/PQ3A.190505.002/5450365:user/release-keys
+BUILD_FINGERPRINT := google/crosshatch/crosshatch:9/PQ3A.190605.003/5524043:user/release-keys
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2960
