@@ -30,9 +30,9 @@ PRODUCT_MANUFACTURER := Google
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=blueline \
-    PRIVATE_BUILD_DESC="blueline-user 9 PQ3A.190705.003 5600800 release-keys"
+    PRIVATE_BUILD_DESC="blueline-user 9 PQ3A.190801.002 5670241 release-keys"
 
-BUILD_FINGERPRINT := google/blueline/blueline:9/PQ3A.190705.003/5600800:user/release-keys
+BUILD_FINGERPRINT := google/blueline/blueline:9/PQ3A.190801.002/5670241:user/release-keys
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2160
