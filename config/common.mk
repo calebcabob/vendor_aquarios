@@ -20,10 +20,10 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
    vendor/aquarios/overlay/common
 
 # Include some other segments
-include vendor/aquarios/configs/aquarios_defaults.mk
-include vendor/aquarios/configs/packages.mk
-include vendor/aquarios/configs/permissions.mk
-include vendor/aquarios/configs/system_fixes.mk
+include vendor/aquarios/config/aquarios_defaults.mk
+include vendor/aquarios/config/packages.mk
+include vendor/aquarios/config/permissions.mk
+include vendor/aquarios/config/system_fixes.mk
 
 # Proprietary latinIME libs needed for keyboard swype gestures
 ifneq ($(filter shamu,$(TARGET_PRODUCT)),)
@@ -84,4 +84,4 @@ endif
 EXCLUDE_SYSTEMUI_TESTS := true
 
 # Vendor/themes
-$(call inherit-product, vendor/assets/common.mk)
+#$(call inherit-product, vendor/assets/common.mk)

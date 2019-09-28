@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Include common makefile
-include vendor/aquarios/configs/common.mk
+include vendor/aquarios/config/common.mk
 
 # Telephony packages
 PRODUCT_PACKAGES += \

@@ -16,6 +16,8 @@
 
 <resources>
 
+    <!-- Commented out for bring-up
     <bool name="config_alt_ambient_display">true</bool>
+    -->
 
 </resources>
